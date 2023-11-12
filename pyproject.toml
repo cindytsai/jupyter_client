@@ -73,6 +73,8 @@ jupyter-kernel = "jupyter_client.kernelapp:main"
 
 [project.entry-points."jupyter_client.kernel_provisioners"]
 local-provisioner = "jupyter_client.provisioning:LocalProvisioner"
+my-kernel-provisioner = "jupyter_client.provisioning:MyKernelProvisioner"
+
 
 [tool.hatch.version]
 path = "jupyter_client/_version.py"
