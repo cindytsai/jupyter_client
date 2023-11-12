@@ -93,22 +93,14 @@ class MyKernelProvisioner(KernelProvisionerBase):  # type:ignore
             "hb_port": 42540,
             "ip": "127.0.0.1",
             "iopub_port": 40885,
-            "key": "a0436f6c-1916-498b-8eb9-e81ab9368e84"
+            "key": b"a0436f6c-1916-498b-8eb9-e81ab9368e84"
         }
-
-        # TODO: connect to port using the above
-        port_name_list = ["shell_port", "iopub_port", "stdin_port", "hb_port", "control_port"]
-        for port_name in port_name_list:
-            tmp_sock = socket.socket()
-            tmp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, b"\0" * 8)  # Don't know what is this line for
-            tmp_sock.bind((connection_json["ip"], connection_json[port_name]))
-            assert tmp_sock.getsockname()[1] == connection_json[port_name], "Port not bind to what we specified!!\n"
-            tmp_sock.close()
 
         # It looks like we don't need to bind to session.
         self.connection_info = connection_json
 
-        return await super().pre_launch(**kwargs)
+        # TODO: have no idea what cmd is for, but it seems jupyter-frontend is complaining.
+        return await super().pre_launch(cmd="", **kwargs)
 
     async def launch_kernel(self, cmd: List[str], **kwargs: Any) -> KernelConnectionInfo:
         # We launch kernel manually, but we need to get its pid through reading files
