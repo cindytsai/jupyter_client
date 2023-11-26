@@ -74,6 +74,7 @@ jupyter-kernel = "jupyter_client.kernelapp:main"
 [project.entry-points."jupyter_client.kernel_provisioners"]
 local-provisioner = "jupyter_client.provisioning:LocalProvisioner"
 my-kernel-provisioner = "jupyter_client.provisioning:MyKernelProvisioner"
+libyt-kernel-provisioner = "jupyter_client.provisioning:LibytKernelProvisioner"
 
 
 [tool.hatch.version]
